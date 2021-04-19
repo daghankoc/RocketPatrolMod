@@ -26,6 +26,11 @@ class Rocket extends Phaser.GameObjects.Sprite {
                 this.x -= this.moveSpeed;
             } else if (keyD.isDown && this.x <= game.config.width - borderUISize - this.width){
                 this.x += this.moveSpeed;
+            } else if (Phaser.Input.Keyboard.JustDown(keyW))
+            {
+                console.log("shot p2");
+                this.isFiring = true;
+                this.sfxRocket.play();
             }
         }
         //firing button
@@ -34,23 +39,12 @@ class Rocket extends Phaser.GameObjects.Sprite {
             this.isFiring = true;
             this.sfxRocket.play(); 
         }
-        if (Phaser.Input.Keyboard.JustDown(keyW)) {
-            if(!this.isFiring){
-                console.log("shot p2");
-                console.log(this.playernumber);
-                if(this.playernumber == 2){
-                    this.isFiring = true;
-                    this.sfxRocket.play(); 
-                }
-            } 
-        }
        
         //move up
         if(this.isFiring && this.y >=borderUISize * 3 + borderPadding && this.playernumber == 1){
             this.y -= this.moveSpeed;
         }
         if(this.isFiring && this.y >=borderUISize * 3 + borderPadding && this.playernumber == 2){
-            console.log("p2 shot")
             this.y -= this.moveSpeed;
         }
         //reset on miss
